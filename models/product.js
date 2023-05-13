@@ -21,7 +21,7 @@ const productSchema = mongoose.Schema(
 
 
 //3
-const productModel = productSchema.model("product", productSchema) //테이블명 설정
+const productModel = mongoose.model("product", productSchema) //테이블명 설정
 
 //4
 export default productModel
