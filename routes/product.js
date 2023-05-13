@@ -21,15 +21,16 @@ router.get("/all", async (req, res) => {
 })
 //상세 데이터 가져오는 API
 router.get("/:productId", async(req, res) => {
-    const product = await productModel.findById(req.params.productId) //url 들어가는 params
+    const { productId } = req.params
+    const product = await productModel.findById(productId) //url 들어가는 params
     // if (!product) {
     //     res.json({
     //         msg: "no product"
     //     })
     // } else {
         res.json({
-            msg: `successful get ${req.params.productId}`,
-            product: product
+            msg: `successful get ${productId}`,
+            product //key, value 값이 동일할 때 생략 가능
         })
     // }
 })
@@ -46,13 +47,11 @@ router.post("/", async (req, res) => {
     // brand: String, //브랜드
     // company: String, //제조 기업
     // stock: Number //재고량
+
+    const { title, price, description, brand, company, stock } = req.body //상수화 시킴
+
     const userInput = new productModel({
-        title: req.body.productTitle,
-        price: req.body.productPrice,
-        description: req.body.productDescription,
-        brand: req.body.productBrand,
-        company: req.body.productCompany,
-        stock: req.body.productStock
+        title, price, description, brand, company, stock //title: title, //key, value 값이 같으면 생략이 가능
     })
 
     const newProduct = await userInput.save()
@@ -63,21 +62,23 @@ router.post("/", async (req, res) => {
     })
 })
 router.put("/:productId", async (req, res) => {
-    const product = await productModel.findById(req.params.productId)
+    const { title, price, description, brand, company, stock } = req.body
+    const { productId } = req.params
+    const product = await productModel.findById(productId)
 
     if (product) {
-        product.title = req.body.productTitle ? req.body.productTitle : product.title //삼항연산자
-        product.price = req.body.productPrice ? req.body.productPrice : product.price
-        product.description = req.body.productDescription ? req.body.productDescription : product.description
-        product.brand = req.body.productBrand ? req.body.productBrand : product.brand
-        product.company = req.body.productCompany ? req.body.productCompany : product.company
-        product.stock = req.body.productStock ? req.body.productStock : product.stock
+        product.title = title ? title : product.title //삼항연산자
+        product.price = price ? price : product.price
+        product.description = description ? description : product.description
+        product.brand = brand ? brand : product.brand
+        product.company = company ? company : product.company
+        product.stock = stock ? stock : product.stock
     }
 
     const updatedProduct = await product.save()
 
     res.json({
-        msg: `updated product at ${req.params.productId}`,
+        msg: `updated product at ${productId}`,
         product: updatedProduct
     })
 })
@@ -90,10 +91,11 @@ router.delete("/", async (req, res) => {
 })
 //하나만 삭제 api
 router.delete("/:productId", async (req, res) => {
+    const { productId } = req.params
     // await productModel.findByIdAndRemove(req.params.productId) //두개 동일
-    await productModel.findByIdAndDelete(req.params.productId)
+    await productModel.findByIdAndDelete(productId)
     res.json({
-        msg: `deleted a product at ${req.params.productId}`
+        msg: `deleted a product at ${productId}`
     })
 })
 
