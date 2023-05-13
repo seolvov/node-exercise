@@ -1,5 +1,6 @@
 import express from "express";
 import Product from "./product.js";
+import orderModel from "../models/order.js";
 
 const router = express.Router()
 
@@ -8,14 +9,18 @@ router.get("/", (req, res) => {
         msg: "order get all"
     })
 })
-router.post("/", (req, res) => {
-    const userInput = {
-        id: req.body.orderId,
-        pw: req.body.orderPw
-    }
+router.post("/", async (req, res) => {
+    const { product, qty, memo } = req.body
+
+    const newOrder = new orderModel({
+        product, qty, memo
+    })
+
+    const createdOrder = await newOrder.save()
+
     res.json({
-        msg: "post ! ",
-        order: userInput
+        msg: "successful new order",
+        order: createdOrder
     })
 })
 router.put("/", (req, res) => {

@@ -2,12 +2,18 @@ import mongoose from "mongoose";
 
 const orderSchema = mongoose.Schema(
     {
-        title: String,
-        price: Number,
-        description: String,
-        brand: String,
-        company: String,
-        stock: Number
+        product: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "product", //어느 테이블을 참조할건지
+            required: true
+        },
+        qty: {
+            type: Number,
+            default: 1
+        },
+        memo: {
+            type: String
+        }
     },
     {
         timestamps: true
