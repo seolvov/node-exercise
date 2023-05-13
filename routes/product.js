@@ -62,9 +62,23 @@ router.post("/", async (req, res) => {
         product: newProduct
     })
 })
-router.put("/", (req, res) => {
+router.put("/:productId", async (req, res) => {
+    const product = await productModel.findById(req.params.productId)
+
+    if (product) {
+        product.title = req.body.productTitle ? req.body.productTitle : product.title //삼항연산자
+        product.price = req.body.productPrice ? req.body.productPrice : product.price
+        product.description = req.body.productDescription ? req.body.productDescription : product.description
+        product.brand = req.body.productBrand ? req.body.productBrand : product.brand
+        product.company = req.body.productCompany ? req.body.productCompany : product.company
+        product.stock = req.body.productStock ? req.body.productStock : product.stock
+    }
+
+    const updatedProduct = await product.save()
+
     res.json({
-        msg: "updated a product"
+        msg: `updated product at ${req.params.productId}`,
+        product: updatedProduct
     })
 })
 //전체 삭제 api
