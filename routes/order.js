@@ -4,9 +4,15 @@ import orderModel from "../models/order.js";
 
 const router = express.Router()
 
-router.get("/", (req, res) => {
+router.get("/all", async (req, res) => {
+    const orders = await orderModel
+        .find()
+        // .populate("product", ["title", "price"])
+        .populate("product") //다 가져올 때
+
     res.json({
-        msg: "order get all"
+        msg: "order get all",
+        orders
     })
 })
 router.post("/", async (req, res) => {
