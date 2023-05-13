@@ -67,9 +67,19 @@ router.put("/", (req, res) => {
         msg: "updated a product"
     })
 })
-router.delete("/", (req, res) => {
+//전체 삭제 api
+router.delete("/", async (req, res) => {
+    await productModel.deleteMany()
     res.json({
-        msg: "deleted a product"
+        msg: "deleted all products"
+    })
+})
+//하나만 삭제 api
+router.delete("/:productId", async (req, res) => {
+    // await productModel.findByIdAndRemove(req.params.productId) //두개 동일
+    await productModel.findByIdAndDelete(req.params.productId)
+    res.json({
+        msg: `deleted a product at ${req.params.productId}`
     })
 })
 
