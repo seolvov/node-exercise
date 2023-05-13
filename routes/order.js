@@ -9,8 +9,13 @@ router.get("/", (req, res) => {
     })
 })
 router.post("/", (req, res) => {
+    const userInput = {
+        id: req.body.orderId,
+        pw: req.body.orderPw
+    }
     res.json({
-        msg: "post ! "
+        msg: "post ! ",
+        order: userInput
     })
 })
 router.put("/", (req, res) => {

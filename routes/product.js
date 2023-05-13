@@ -8,8 +8,14 @@ router.get("/all", (req, res) => {
     })
 })
 router.post("/create", (req, res) => {
+    const userInput = {
+        name: req.body.productName,
+        price: req.body.productPrice,
+        stock: req.body.productStock
+    }
     res.json({
-        msg: "created a product"
+        msg: "created a product",
+        product: userInput
     })
 })
 router.put("/update", (req, res) => {
