@@ -9,6 +9,7 @@ import connectDB from "./config/database.js"
 
 import productRoute from "./routes/product.js";
 import orderRoute from "./routes/order.js";
+import userRoute from "./routes/user.js"
 
 dotEnv.config()
 
@@ -23,6 +24,7 @@ connectDB()
 
 app.use("/product", productRoute)
 app.use("/order", orderRoute)
+app.use("/user", userRoute)
 
 app.get("/test", (req, res) => {
     res.json({
