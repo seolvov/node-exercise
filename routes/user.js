@@ -1,7 +1,4 @@
 import express from "express";
-import userModel from "../models/user.js";
-import bcrypt from "bcryptjs" //암호화해주는 라이브러리
-import jwt from "jsonwebtoken"
 import {allHandling, getProfileByToken, loginHandling, signupHandling} from "../controllers/user.js";
 import {protect} from "../middleware/authMiddleware.js";
 

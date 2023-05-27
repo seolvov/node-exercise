@@ -1,5 +1,4 @@
 import express from "express";
-import productModel from "../models/product.js";
 import {
     createProduct, deleteAllProducts, deleteAProductById,
     getAllProducts, getAProductById, updateProductById

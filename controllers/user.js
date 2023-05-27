@@ -52,7 +52,7 @@ const loginHandling = async (req, res) => {
         // "privateKey", //이것또한 들어나면 안되기 때문에 .env에 설정
         process.env.ACCESS_TOKEN_KEY,
         //3. 만료 시간
-        {expiresIn: "10m"}
+        {expiresIn: "1h"}
         //return 된 token 을 https://jwt.io/ 여기서 확인하면 시간이 나옴
     )
     res.json({
