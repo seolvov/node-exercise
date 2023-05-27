@@ -30,6 +30,17 @@ const protect = async (req, res, next) => { //middelware 는 중간 역할이라
     }
 }
 
+//admin check 를 함수로 정리
+const admin = (req, res, next) => {
+    if(req.user && req.user.isAdmin) {
+        next()
+    } else {
+        res.json({
+            msg: 'you are not admin'
+        })
+    }
+}
 
 
-export { protect }
+
+export { protect, admin }

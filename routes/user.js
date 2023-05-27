@@ -1,6 +1,6 @@
 import express from "express";
 import {getAllUsers, getProfileByToken, loginHandling, signupHandling} from "../controllers/user.js";
-import {protect} from "../middleware/authMiddleware.js";
+import {protect, admin} from "../middleware/authMiddleware.js";
 
 const router = express.Router()
 
@@ -12,6 +12,6 @@ router.post("/login", loginHandling)
 //프로필정보
 router.get("/", protect, getProfileByToken)
 //정보가져오기
-router.get("/all", protect, getAllUsers)
+router.get("/all", protect, admin, getAllUsers)
 
 export default router

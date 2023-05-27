@@ -72,11 +72,6 @@ const getProfileByToken = async (req, res) => {
 
 const getAllUsers = async (req, res) => {
     const users = await userModel.find()
-    if(req.user.isAdmin === false) {
-        return res.json({
-            msg: 'you are not admin'
-        })
-    }
     res.json( {
         msg: "get all users",
         users
