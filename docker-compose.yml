@@ -2,6 +2,21 @@ version: '3.1'
 
 services:
 
+  backend:
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    container_name: app-nodejs
+    restart: always
+    env_file:
+      - .env
+    volumes:
+      - ./:/data/node_mongo/app
+    ports:
+      - "9091:9091"
+    depends_on:
+      - mongo
+
   mongo:
     image: mongo
     restart: always
