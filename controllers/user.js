@@ -2,6 +2,7 @@ import userModel from "../models/user.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
+//java 에서 service 부분
 const signupHandling = async (req, res) => {
     const { email, password, userName, address, phone } = req.body
 

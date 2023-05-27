@@ -6,8 +6,9 @@ import {allHandling, loginHandling, signupHandling} from "../controllers/user.js
 
 const router = express.Router()
 
+//java 에서 controller 부분
 //회원가입
-router.post("/signup", signupHandling)
+router.post("/signup", signupHandling) //signHandling : 비즈니스 로직
 //로그인
 router.post("/login", loginHandling)
 //정보가져오기
