@@ -5,6 +5,7 @@ const getAllOrders = async (req, res) => {
         .find()
         // .populate("product", ["title", "price"])
         .populate("product") //다 가져올 때
+        .populate("user")
 
     res.json({
         msg: "order get all",
@@ -16,7 +17,7 @@ const createOrder = async (req, res) => {
     const { product, qty, memo } = req.body
 
     const newOrder = new orderModel({
-        product, qty, memo
+        product, qty, memo, user: req.user._id
     })
 
     const createdOrder = await newOrder.save()
