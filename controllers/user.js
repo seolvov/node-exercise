@@ -61,6 +61,15 @@ const loginHandling = async (req, res) => {
     })
 }
 
+const getProfileByToken = async (req, res) => {
+    res.json({
+        user: req.user
+        //protect 가 있으면 header 에 token 이 들어가야함
+        //protect 가 있어서 req.user 를 쓸 수 있다
+        //controller 에서 오기 때문에 protect 를 사용할 수 있다
+    })
+}
+
 const allHandling = async (req, res) => {
     const users = await userModel.find()
     res.json( {
@@ -69,4 +78,4 @@ const allHandling = async (req, res) => {
     })
 }
 
-export { signupHandling, loginHandling, allHandling }
+export { signupHandling, loginHandling, allHandling, getProfileByToken }
